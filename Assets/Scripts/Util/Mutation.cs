@@ -99,9 +99,12 @@ namespace Keiwando.Evolution {
         private static T MutateChunk<T, E>(T chromosome, Mutate<E> mutate) where T: IMutatable<E> {
 
             int start = UnityEngine.Random.Range(0, chromosome.Length - 1);
-            int length = Math.Min(Math.Max(0, chromosome.Length - start - 3), UnityEngine.Random.Range(2, 15));
+            int length = Math.Min(
+                Math.Max(0, chromosome.Length - start - 3),
+                UnityEngine.Random.Range(2, 15)
+            );
 
-            for (int i = start; i < length; i++) {
+            for (int i = start; i < start + length; i++) {
                 chromosome[i] = mutate(chromosome[i]);
             }
 
