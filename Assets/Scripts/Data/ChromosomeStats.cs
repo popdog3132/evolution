@@ -16,12 +16,18 @@ public struct ChromosomeStats {
 		return string.Format("{0}:{1}", chromosome, stats.Encode());
 	}
 
-	public static ChromosomeStats FromString(string str) {
+        public static ChromosomeStats FromString(string str) {
 
-		var parts = str.Split(':');
+                var separatorIndex = str.IndexOf(':');
+                if (separatorIndex < 0) {
+                        throw new FormatException("Invalid ChromosomeStats string: missing separator");
+                }
 
-		return new ChromosomeStats(parts[0], CreatureStats.Decode(parts[1]));
-	}
+                var chromosome = str.Substring(0, separatorIndex);
+                var statsEncoded = str.Substring(separatorIndex + 1);
+
+                return new ChromosomeStats(chromosome, CreatureStats.Decode(statsEncoded));
+        }
 }
 
 
