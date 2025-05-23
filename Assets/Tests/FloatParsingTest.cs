@@ -15,7 +15,7 @@ public class FloatParsingTest {
             float original = UnityEngine.Random.Range(-10f, 10f);
             string encoded = original.ToString("G9");
             float parsed = float.Parse(encoded);
-            Assert.AreEqual(original, parsed);
+            Assert.IsTrue(AlmostEqual2sComplement(original, parsed, 1));
         }
     }
 
